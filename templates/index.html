@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form method="POST" class="weather-form">
+            <input type="text" name="city" placeholder="City" required>
+            <input type="text" name="state" placeholder="State (optional)">
+            <input type="text" name="country" placeholder="Country Code" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        {% if weather_info %}
+            <div class="weather-info">
+                <h2>Weather Information</h2>
+                <p>{{ weather_info|safe }}</p>
+            </div>
+            <audio id="weatherAudio" src="{{ url_for('static', filename='weather.mp3') }}" preload="auto"></audio>
+            <script>
+                window.onload = function() {
+                    const audio = document.getElementById("weatherAudio");
+                    audio.play();
+                }
+            </script>
+        {% endif %}
+    </div>
+</body>
+</html>
